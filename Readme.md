@@ -26,7 +26,7 @@ The regularisation term is the normalised L1 norm of all gate values. It's abili
 |  0.00020   |     52.9%     |       77.2%        |
 |  0.00500   |     42.0%     |       99.7%        |
 
-**Key observation:** Sparsity increases from 12% to 77% with only a 1.2% drop in accuracy and the network retains most of its predictive capacity, which confirmed that a large fraction of weights in a shallow MLP on CIFAR-10 were redundant.
+**Key observation:** Sparsity increases from 12% to 77% with only a 1.2% drop in accuracy and the network retains most of its predictive capacity, which confirmed that a large fraction of weights in a shallow MLP were redundant.
 
 ---
 
@@ -45,7 +45,6 @@ The histogram confirms the method is working as intended. The dominant spike at 
 - **`PrunableLinear`** stores a `gate_scores` parameter of shape `(out_features, in_features)` matching `nn.Linear`'s weight convention. The forward pass computes `pruned_weight = weight × sigmoid(gate_scores)` and calls `F.linear`. Gradients flow through both tensors automatically.
 - **Normalised sparsity loss** divides the summed gate values by total gate count, making λ comparable across different architectures and layer widths.
 - **Early stopping** (patience=3 epochs) prevent over-training, which is particularly important at high λ where the sparsity loss can dominate and collapse accuracy if training continues past convergence.
-
 ---
 
 ## 5. References
