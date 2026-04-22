@@ -222,7 +222,7 @@ def combined_pipeline(lam_list:list):
     
     for lam in lam_list:
         model, _ = training(lam)
-        torch.save(model, f'/models/{lam}_model.pth')
+        torch.save(model, f'./models/{lam}_model.pth')
         test_acc = evaluate(model)
         sparsity = compute_sparsity(model)
         result.append((lam, test_acc, sparsity))
@@ -262,7 +262,7 @@ def main():
 
     # lam = 0.0002 gives the best test accuracy, while pruning around 75% of the weights, 
     # so we will analyze that model for gate distribution and sparsity patterns
-    model_path = f'/models/{lam[-2]}_model.pth'  
+    model_path = f'./models/{lam[-2]}_model.pth'  
     plot_and_stats(model_path)
 
 if __name__ == "__main__":
